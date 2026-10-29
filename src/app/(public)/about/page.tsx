@@ -3,6 +3,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { GraduationCap, Award, BookOpen, Users, Mail, Download } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
+import { ImageReveal, Stagger, StaggerItem } from '@/components/motion';
 
 const qualifications = [
   { title: 'Bachelor of Science in Mathematics', institution: 'University of Colombo', year: '2008' },
@@ -21,12 +23,12 @@ export default function AboutPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="section-padding bg-gradient-to-br from-brand-50 to-indigo-50">
+      <section className="section-padding page-hero">
         <div className="container-custom">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <Badge variant="brand" className="mb-4">About Me</Badge>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-6 leading-tight">
+              <h1 className="text-5xl md:text-6xl text-brand-950 mb-6 leading-tight">
                 Passionate About <span className="text-gradient">Education & Growth</span>
               </h1>
               <p className="text-gray-600 text-lg leading-relaxed mb-6">
@@ -41,17 +43,21 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="flex flex-col gap-6">
-              <div className="w-full h-80 rounded-2xl bg-gradient-to-br from-brand-400 to-brand-700 flex items-center justify-center shadow-xl">
-                <GraduationCap className="h-32 w-32 text-white/40" />
+              <div className="relative">
+                <div className="absolute -bottom-4 -right-4 w-2/3 h-2/3 rounded-2xl border-2 border-gold-300" aria-hidden />
+                <ImageReveal className="relative h-80 rounded-2xl shadow-xl">
+                  <Image src="/images/teacher-classroom.jpg" alt="An English teacher leading a lively class" fill
+                    sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" priority />
+                </ImageReveal>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <Stagger className="grid grid-cols-2 gap-4">
                 {achievements.map(a => (
-                  <div key={a.label} className="bg-white rounded-xl p-4 text-center shadow-sm border">
-                    <div className="text-3xl font-bold text-brand-700">{a.value}</div>
+                  <StaggerItem key={a.label} className="bg-white rounded-xl p-4 text-center shadow-sm border border-brand-100 transition-all duration-300 hover:-translate-y-1 hover:border-gold-300 hover:shadow-md">
+                    <div className="font-display text-4xl font-semibold text-brand-900">{a.value}</div>
                     <div className="text-sm text-gray-500 mt-1">{a.label}</div>
-                  </div>
+                  </StaggerItem>
                 ))}
-              </div>
+              </Stagger>
             </div>
           </div>
         </div>
@@ -62,7 +68,7 @@ export default function AboutPage() {
         <div className="container-custom">
           <div className="text-center mb-10">
             <Badge variant="brand" className="mb-3">Education</Badge>
-            <h2 className="text-3xl font-bold text-gray-900">Academic Qualifications</h2>
+            <h2 className="text-3xl text-brand-950">Academic Qualifications</h2>
           </div>
           <div className="max-w-3xl mx-auto space-y-4">
             {qualifications.map((q, i) => (
@@ -88,7 +94,7 @@ export default function AboutPage() {
         <div className="container-custom">
           <div className="max-w-3xl mx-auto text-center">
             <Badge variant="brand" className="mb-4">Philosophy</Badge>
-            <h2 className="text-3xl font-bold text-gray-900 mb-6">My Teaching Philosophy</h2>
+            <h2 className="text-3xl text-brand-950 mb-6">My Teaching Philosophy</h2>
             <p className="text-gray-600 text-lg leading-relaxed mb-6">
               Education is not just about transferring knowledge — it's about inspiring curiosity, building confidence, and nurturing a lifelong love of learning.
             </p>

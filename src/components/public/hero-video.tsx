@@ -102,8 +102,8 @@ export function HeroVideo({ clips = heroClips, className }: { clips?: HeroClip[]
       })}
 
       {/* Brand tint + vignette keep the headline readable over any footage. */}
-      <div className="absolute inset-0 bg-gradient-to-br from-brand-900/90 via-brand-700/75 to-indigo-600/70" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(15,10,60,0.55)_100%)]" />
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-950/90 via-brand-900/80 to-brand-800/70" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(7,24,50,0.6)_100%)]" />
 
       {/* Scene controls */}
       <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex items-center gap-3 rounded-full bg-black/25 px-3 py-2 backdrop-blur-md">

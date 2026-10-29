@@ -48,7 +48,7 @@ export default async function CourseDetailPage({ params }: Props) {
 
   return (
     <div>
-      <section className="section-padding bg-gradient-to-br from-brand-50 to-indigo-50">
+      <section className="section-padding page-hero">
         <div className="container-custom">
           <Link href="/courses" className="text-sm text-gray-600 hover:text-gray-900 flex items-center gap-1 mb-6">
             <ArrowLeft className="h-4 w-4" />All courses
@@ -59,7 +59,7 @@ export default async function CourseDetailPage({ params }: Props) {
                 <Badge variant="brand">{course.category}</Badge>
                 <Badge variant="secondary">{course.level}</Badge>
               </div>
-              <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">{course.title}</h1>
+              <h1 className="text-4xl md:text-5xl text-brand-950 mb-4">{course.title}</h1>
               <p className="text-lg text-gray-600 leading-relaxed mb-6 whitespace-pre-line">{course.description}</p>
               <div className="flex flex-wrap gap-5 text-sm text-gray-600">
                 {course.duration && <span className="flex items-center gap-1.5"><Clock className="h-4 w-4" />{course.duration}</span>}
@@ -70,7 +70,7 @@ export default async function CourseDetailPage({ params }: Props) {
             </div>
 
             <Card className="shadow-xl overflow-hidden">
-              <div className="h-44 bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center relative">
+              <div className="h-44 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 flex items-center justify-center relative">
                 {course.thumbnail
                   ? <Image src={course.thumbnail} alt="" fill className="object-cover" sizes="360px" />
                   : <BookOpen className="h-16 w-16 text-white/50" />}
@@ -99,7 +99,7 @@ export default async function CourseDetailPage({ params }: Props) {
           <div className="space-y-10">
             {syllabus.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">What you&apos;ll learn</h2>
+                <h2 className="text-2xl text-brand-950 mb-4">What you&apos;ll learn</h2>
                 <ul className="grid sm:grid-cols-2 gap-3">
                   {syllabus.map(item => (
                     <li key={item} className="flex items-start gap-2 text-gray-700"><CheckCircle className="h-5 w-5 text-emerald-500 flex-shrink-0 mt-0.5" />{item}</li>
@@ -110,7 +110,7 @@ export default async function CourseDetailPage({ params }: Props) {
 
             {course.modules.length > 0 && (
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-4">Course content</h2>
+                <h2 className="text-2xl text-brand-950 mb-4">Course content</h2>
                 <div className="space-y-3">
                   {course.modules.map((m, i) => (
                     <details key={m.id} className="rounded-lg border group" open={i === 0}>
@@ -139,7 +139,7 @@ export default async function CourseDetailPage({ params }: Props) {
 
           {course.sessions.length > 0 && (
             <div>
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Upcoming live sessions</h2>
+              <h2 className="text-xl text-brand-950 mb-4">Upcoming live sessions</h2>
               <div className="space-y-3">
                 {course.sessions.map(s => (
                   <div key={s.id} className="rounded-lg border p-4">

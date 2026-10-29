@@ -36,7 +36,7 @@ export default async function AdminCoursesPage() {
         ) : (
           courses.map(course => (
             <Card key={course.id} className="overflow-hidden card-hover">
-              <div className="h-32 bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center relative">
+              <div className="h-32 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 flex items-center justify-center relative">
                 <BookOpen className="h-12 w-12 text-white/40" />
                 <div className="absolute top-2 right-2 flex gap-1">
                   <Badge variant={course.isPublished ? 'success' : 'secondary'} className="text-xs">

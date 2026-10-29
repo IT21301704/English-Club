@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { animate, motion, useInView, useReducedMotion, type HTMLMotionProps } from 'framer-motion';
+import { animate, motion, useInView, useReducedMotion, useScroll, useTransform, type HTMLMotionProps } from 'framer-motion';
 import { cn, formatCurrency } from '@/lib/utils';
 
 const ease = [0.22, 1, 0.36, 1] as const;
@@ -65,6 +65,68 @@ export function HoverLift({ className, children, ...props }: HTMLMotionProps<'di
       transition={{ type: 'spring', stiffness: 300, damping: 20 }}
       className={cn('h-full', className)}
       {...props}
+    >
+      {children}
+    </motion.div>
+  );
+}
+
+/** Unveils its content with a wipe from `from` while the content settles from a slight zoom. */
+export function ImageReveal({
+  className, children, delay = 0, from = 'left',
+}: { className?: string; children: React.ReactNode; delay?: number; from?: 'left' | 'bottom' }) {
+  const hidden = from === 'left' ? 'inset(0 100% 0 0)' : 'inset(100% 0 0 0)';
+  return (
+    <motion.div
+      className={cn('overflow-hidden', className)}
+      initial={{ clipPath: hidden }}
+      whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
+      viewport={{ once: true, margin: '-80px' }}
+      transition={{ duration: 1.1, ease, delay }}
+    >
+      <motion.div
+        className="relative h-full w-full"
+        initial={{ scale: 1.2 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true, margin: '-80px' }}
+        transition={{ duration: 1.6, ease, delay }}
+      >
+        {children}
+      </motion.div>
+    </motion.div>
+  );
+}
+
+/** Moves its content against the scroll direction for a depth effect. `offset` is in pixels. */
+export function Parallax({ className, children, offset = 60 }: { className?: string; children: React.ReactNode; offset?: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({ target: ref, offset: ['start end', 'end start'] });
+  const y = useTransform(scrollYProgress, [0, 1], reduce ? [0, 0] : [-offset, offset]);
+  return (
+    <div ref={ref} className={cn('relative overflow-hidden', className)}>
+      {/* Oversized by `offset` on each side so the edges never show while moving. */}
+      <motion.div style={{ y, top: -offset, bottom: -offset }} className="absolute inset-x-0">
+        {children}
+      </motion.div>
+    </div>
+  );
+}
+
+/** Gently bobs up and down; used for floating badges over images. */
+export function Float({ className, children, delay = 0 }: { className?: string; children: React.ReactNode; delay?: number }) {
+  const reduce = useReducedMotion();
+  return (
+    <motion.div
+      className={className}
+      initial={{ opacity: 0, scale: 0.8 }}
+      whileInView={{ opacity: 1, scale: 1 }}
+      viewport={{ once: true }}
+      animate={reduce ? undefined : { y: [0, -10, 0] }}
+      transition={{
+        opacity: { duration: 0.5, delay }, scale: { duration: 0.5, delay, ease },
+        y: { duration: 5, repeat: Infinity, ease: 'easeInOut', delay },
+      }}
     >
       {children}
     </motion.div>

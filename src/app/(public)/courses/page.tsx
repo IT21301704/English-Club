@@ -21,10 +21,10 @@ export default async function CoursesPage() {
   return (
     <div>
       {/* Header */}
-      <section className="section-padding bg-gradient-to-br from-brand-50 to-indigo-50">
+      <section className="section-padding page-hero">
         <div className="container-custom text-center">
           <Badge variant="brand" className="mb-4">Courses & Training</Badge>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">All Courses &amp; Programmes</h1>
+          <h1 className="text-4xl md:text-5xl text-brand-950 mb-4">All Courses &amp; Programmes</h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">Explore our comprehensive range of courses designed to help you achieve your goals.</p>
         </div>
       </section>

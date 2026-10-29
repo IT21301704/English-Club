@@ -113,7 +113,7 @@ export function CourseGrid({ courses }: { courses: CourseCard[] }) {
               whileHover={{ y: -4 }}
             >
               <Card className="group h-full overflow-hidden flex flex-col transition-shadow duration-300 hover:shadow-xl">
-                <div className="h-44 bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center relative overflow-hidden">
+                <div className="h-44 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 flex items-center justify-center relative overflow-hidden">
                   <BookOpen className="h-16 w-16 text-white/50 transition-transform duration-500 group-hover:scale-125 group-hover:-rotate-6" />
                   {course.isFeatured && <Badge className="absolute top-3 right-3 bg-yellow-400 text-yellow-900 border-0">⭐ Featured</Badge>}
                 </div>

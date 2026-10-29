@@ -180,7 +180,7 @@ export function Navbar() {
       </AnimatePresence>
 
       {/* Page scroll progress */}
-      <motion.div className="absolute left-0 right-0 bottom-0 h-0.5 origin-left bg-gradient-to-r from-brand-600 to-indigo-400"
+      <motion.div className="absolute left-0 right-0 bottom-0 h-0.5 origin-left bg-gradient-to-r from-gold-500 to-gold-300"
         style={{ scaleX: progress }} />
     </nav>
   );

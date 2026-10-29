@@ -26,10 +26,10 @@ export default async function TestimonialsPage() {
 
   return (
     <div>
-      <section className="section-padding bg-gradient-to-br from-brand-50 to-indigo-50">
+      <section className="section-padding page-hero">
         <div className="container-custom text-center">
           <Badge variant="brand" className="mb-4">Testimonials</Badge>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Student Success Stories</h1>
+          <h1 className="text-4xl md:text-5xl text-brand-950 mb-4">Student Success Stories</h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">Real results from real students. See how English Club has transformed learning journeys.</p>
         </div>
       </section>

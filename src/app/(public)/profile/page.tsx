@@ -18,10 +18,10 @@ const certifications = [
 export default function ProfilePage() {
   return (
     <div>
-      <section className="section-padding bg-gradient-to-br from-brand-50 to-indigo-50">
+      <section className="section-padding page-hero">
         <div className="container-custom text-center">
           <Badge variant="brand" className="mb-4">Profile</Badge>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Academic &amp; Professional Profile</h1>
+          <h1 className="text-4xl md:text-5xl text-brand-950 mb-4">Academic &amp; Professional Profile</h1>
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">A decade of academic excellence and professional training experience.</p>
         </div>
       </section>
@@ -31,7 +31,7 @@ export default function ProfilePage() {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Left: Experience */}
             <div className="lg:col-span-2">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center gap-2"><Briefcase className="h-6 w-6 text-brand-600" />Professional Experience</h2>
+              <h2 className="text-2xl text-brand-950 mb-6 flex items-center gap-2"><Briefcase className="h-6 w-6 text-brand-600" />Professional Experience</h2>
               <div className="space-y-6">
                 {experience.map((exp, i) => (
                   <div key={i} className="relative pl-8 pb-6 border-l-2 border-brand-200 last:border-l-0">

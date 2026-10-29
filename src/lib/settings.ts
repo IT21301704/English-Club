@@ -8,7 +8,7 @@ export const DEFAULT_SETTINGS: Record<SettingKey, string> = {
   contactPhone: '+94 70 123 4567',
   address: 'Colombo, Sri Lanka',
   officeHours: 'Monday – Friday: 8:00 AM – 6:00 PM\nSaturday: 9:00 AM – 1:00 PM\nSunday: Closed',
-  facebookUrl: '',
+  facebookUrl: 'https://www.facebook.com/share/1F7HbFQDRX/',
   youtubeUrl: '',
   linkedinUrl: '',
   whatsappNumber: '',

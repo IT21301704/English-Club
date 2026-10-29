@@ -17,10 +17,10 @@ export default async function ContactPage() {
 
   return (
     <div>
-      <section className="section-padding bg-gradient-to-br from-brand-50 to-indigo-50">
+      <section className="section-padding page-hero">
         <div className="container-custom text-center">
           <Badge variant="brand" className="mb-4">Contact</Badge>
-          <h1 className="text-4xl md:text-5xl font-extrabold text-gray-900 mb-4">Get in Touch</h1>
+          <h1 className="text-4xl md:text-5xl text-brand-950 mb-4">Get in Touch</h1>
           <p className="text-gray-600 text-lg max-w-xl mx-auto">Have a question or want to enroll? We&apos;d love to hear from you.</p>
         </div>
       </section>
@@ -30,7 +30,7 @@ export default async function ContactPage() {
           <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
             <div className="space-y-8">
               <div>
-                <h2 className="text-2xl font-bold text-gray-900 mb-6">Contact Information</h2>
+                <h2 className="text-2xl text-brand-950 mb-6">Contact Information</h2>
                 <div className="space-y-4">
                   {channels.map(({ icon: Icon, label, value, href }) => (
                     <a key={label} href={href} target={href.startsWith('http') ? '_blank' : undefined} rel="noreferrer"

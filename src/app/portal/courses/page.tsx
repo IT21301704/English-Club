@@ -52,7 +52,7 @@ export default async function PortalCoursesPage() {
 
             return (
               <Card key={enrollment.id} className="card-hover overflow-hidden">
-                <div className="h-28 bg-gradient-to-br from-brand-500 to-indigo-600 flex items-center justify-center">
+                <div className="h-28 bg-gradient-to-br from-brand-700 via-brand-800 to-brand-950 flex items-center justify-center">
                   <BookOpen className="h-12 w-12 text-white/50" />
                 </div>
                 <CardContent className="p-5">

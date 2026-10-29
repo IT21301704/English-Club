@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500;1,600&family=Inter:wght@300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -12,7 +12,7 @@
     --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
-    --primary: 238 84% 61%;
+    --primary: 216 58% 29%;
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -24,7 +24,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 238 84% 61%;
+    --ring: 216 58% 29%;
     --radius: 0.5rem;
   }
 
@@ -35,7 +35,7 @@
     --card-foreground: 210 40% 98%;
     --popover: 222.2 84% 4.9%;
     --popover-foreground: 210 40% 98%;
-    --primary: 238 84% 61%;
+    --primary: 37 42% 56%;
     --primary-foreground: 222.2 47.4% 11.2%;
     --secondary: 217.2 32.6% 17.5%;
     --secondary-foreground: 210 40% 98%;
@@ -47,7 +47,7 @@
     --destructive-foreground: 210 40% 98%;
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 238 84% 61%;
+    --ring: 37 42% 56%;
   }
 }
 
@@ -55,6 +55,9 @@
   * { @apply border-border; }
   body { @apply bg-background text-foreground font-sans; }
   h1,h2,h3,h4,h5,h6 { @apply font-semibold tracking-tight; }
+  /* Large headings use the logo's classical serif; smaller ones stay in Inter for legibility. */
+  h1,h2 { @apply font-display font-semibold tracking-normal; }
+  ::selection { @apply bg-gold-200 text-brand-950; }
 }
 
 @layer components {
@@ -68,10 +71,26 @@
     @apply transition-all duration-300 hover:shadow-lg hover:-translate-y-1;
   }
   .gradient-brand {
-    @apply bg-gradient-to-r from-brand-600 to-brand-500;
+    @apply bg-gradient-to-br from-brand-950 via-brand-900 to-brand-700;
   }
   .text-gradient {
-    @apply bg-gradient-to-r from-brand-600 to-indigo-400 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-gold-600 via-gold-400 to-gold-600 bg-clip-text text-transparent;
+  }
+  /* Small uppercase label above section headings, flanked by gold rules like the logo. */
+  .eyebrow {
+    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold-600;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: '';
+    @apply h-px w-8 bg-gold-400;
+  }
+  /* Soft paper-toned header band used at the top of inner pages. */
+  .page-hero {
+    @apply relative overflow-hidden bg-gradient-to-br from-brand-50 via-white to-gold-50;
+  }
+  .page-hero::after {
+    content: '';
+    @apply pointer-events-none absolute inset-x-0 bottom-0 h-px bg-gradient-to-r from-transparent via-gold-400 to-transparent;
   }
 }
 
