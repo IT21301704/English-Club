@@ -1,0 +1,338 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  // Runtime queries. On Supabase use the pooled connection (port 6543, ?pgbouncer=true).
+  url       = env("DATABASE_URL")
+  // Schema changes (db push / migrate). On Supabase use the direct connection (port 5432).
+  directUrl = env("DIRECT_URL")
+}
+
+enum Role {
+  ADMIN
+  STUDENT
+}
+
+enum EnrollmentStatus {
+  PENDING   // awaiting payment of the linked invoice
+  ACTIVE
+  COMPLETED
+  SUSPENDED
+}
+
+enum InvoiceStatus {
+  PENDING
+  PAID
+  OVERDUE
+  CANCELLED
+}
+
+enum LessonType {
+  VIDEO
+  PDF
+  QUIZ
+  ASSIGNMENT
+}
+
+enum SubmissionStatus {
+  SUBMITTED
+  GRADED
+  RETURNED
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  passwordHash  String?
+  avatar        String?
+  role          Role      @default(STUDENT)
+  phone         String?
+  bio           String?
+  isActive      Boolean   @default(true)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  enrollments   Enrollment[]
+  progress      Progress[]
+  submissions   Submission[]
+  quizAttempts  QuizAttempt[]
+  invoices      Invoice[]
+  testimonials  Testimonial[]
+  sessionAttendances SessionAttendance[]
+
+  @@map("users")
+}
+
+model Course {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  description String
+  syllabus    String?
+  thumbnail   String?
+  category    String
+  level       String   @default("Beginner")
+  duration    String?
+  price       Float    @default(0)
+  currency    String   @default("LKR")
+  isPublished Boolean  @default(false)
+  isFeatured  Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  modules     Module[]
+  enrollments Enrollment[]
+  sessions    Session[]
+  invoices    Invoice[]
+
+  @@map("courses")
+}
+
+model Module {
+  id        String   @id @default(cuid())
+  courseId  String
+  title     String
+  order     Int
+  createdAt DateTime @default(now())
+
+  course  Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  lessons Lesson[]
+
+  @@map("modules")
+}
+
+model Lesson {
+  id          String     @id @default(cuid())
+  moduleId    String
+  title       String
+  type        LessonType
+  contentUrl  String?
+  description String?
+  duration    Int?       // in minutes
+  order       Int
+  isPublished Boolean    @default(true)
+  createdAt   DateTime   @default(now())
+
+  module      Module       @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  progress    Progress[]
+  quizzes     Quiz[]
+  assignments Assignment[]
+
+  @@map("lessons")
+}
+
+model Enrollment {
+  id         String           @id @default(cuid())
+  userId     String
+  courseId   String
+  status     EnrollmentStatus @default(ACTIVE)
+  enrolledAt DateTime         @default(now())
+  completedAt DateTime?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course @relation(fields: [courseId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, courseId])
+  @@map("enrollments")
+}
+
+model Progress {
+  id          String   @id @default(cuid())
+  userId      String
+  lessonId    String
+  completedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lesson Lesson @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, lessonId])
+  @@map("progress")
+}
+
+model Session {
+  id          String   @id @default(cuid())
+  courseId    String
+  title       String
+  description String?
+  scheduledAt DateTime
+  duration    Int      // in minutes
+  meetLink    String?
+  isCompleted Boolean  @default(false)
+  createdAt   DateTime @default(now())
+
+  course     Course             @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  attendances SessionAttendance[]
+
+  @@map("sessions")
+}
+
+model SessionAttendance {
+  id        String   @id @default(cuid())
+  sessionId String
+  userId    String
+  attended  Boolean  @default(false)
+  joinedAt  DateTime?
+
+  session Session @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([sessionId, userId])
+  @@map("session_attendances")
+}
+
+model Assignment {
+  id          String   @id @default(cuid())
+  lessonId    String
+  title       String
+  description String
+  dueDate     DateTime?
+  maxMarks    Int      @default(100)
+  createdAt   DateTime @default(now())
+
+  lesson      Lesson       @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  submissions Submission[]
+
+  @@map("assignments")
+}
+
+model Submission {
+  id           String           @id @default(cuid())
+  assignmentId String
+  userId       String
+  fileUrl      String?
+  textContent  String?
+  grade        Int?
+  feedback     String?
+  status       SubmissionStatus @default(SUBMITTED)
+  submittedAt  DateTime         @default(now())
+  gradedAt     DateTime?
+
+  assignment Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([assignmentId, userId])
+  @@map("submissions")
+}
+
+model Quiz {
+  id        String   @id @default(cuid())
+  lessonId  String
+  title     String
+  timeLimit Int?     // in minutes
+  passMark  Int      @default(50)
+  createdAt DateTime @default(now())
+
+  lesson    Lesson        @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  questions QuizQuestion[]
+  attempts  QuizAttempt[]
+
+  @@map("quizzes")
+}
+
+model QuizQuestion {
+  id           String   @id @default(cuid())
+  quizId       String
+  question     String
+  options      String[] // JSON array stored as text array
+  correctIndex Int
+  explanation  String?
+  order        Int
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+
+  @@map("quiz_questions")
+}
+
+model QuizAttempt {
+  id          String   @id @default(cuid())
+  quizId      String
+  userId      String
+  score       Int
+  maxScore    Int
+  answersJson Json
+  completedAt DateTime @default(now())
+
+  quiz Quiz @relation(fields: [quizId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("quiz_attempts")
+}
+
+model Invoice {
+  id          String        @id @default(cuid())
+  userId      String
+  courseId    String?       // when set, paying this invoice activates the enrollment
+  amount      Float
+  currency    String        @default("LKR")
+  description String
+  status      InvoiceStatus @default(PENDING)
+  dueDate     DateTime?
+  paidAt      DateTime?
+  paymentRef  String?       // gateway transaction id / manual receipt no.
+  pdfUrl      String?
+  issuedAt    DateTime      @default(now())
+
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  course Course? @relation(fields: [courseId], references: [id], onDelete: SetNull)
+
+  @@map("invoices")
+}
+
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  subject   String
+  message   String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@map("contact_messages")
+}
+
+model Testimonial {
+  id         String   @id @default(cuid())
+  userId     String
+  content    String
+  rating     Int      @default(5)
+  course     String?
+  isApproved Boolean  @default(false)
+  isFeatured Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("testimonials")
+}
+
+model TrainingPackage {
+  id          String   @id @default(cuid())
+  name        String
+  description String
+  features    String[]
+  price       Float
+  currency    String   @default("LKR")
+  duration    String
+  isPopular   Boolean  @default(false)
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+
+  @@map("training_packages")
+}
+
+model SiteSettings {
+  id            String   @id @default(cuid())
+  key           String   @unique
+  value         String
+  updatedAt     DateTime @updatedAt
+
+  @@map("site_settings")
+}
