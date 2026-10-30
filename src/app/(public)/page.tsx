@@ -58,10 +58,10 @@ export default function HomePage() {
         <div className="container-custom section-padding relative z-10 w-full pb-32 md:pb-40">
           <Stagger gap={0.14} className="max-w-3xl mx-auto text-center">
             <StaggerItem>
-              <span className="eyebrow mb-6 text-gold-300 before:bg-gold-300 after:bg-gold-300">{BRAND_NAME}</span>
+              <span className="eyebrow mb-6 text-center text-gold-300 before:hidden after:hidden sm:before:block sm:after:block before:bg-gold-300 after:bg-gold-300">{BRAND_NAME}</span>
             </StaggerItem>
             <StaggerItem>
-              <h1 className="text-5xl md:text-7xl leading-[1.05] mb-6">
+              <h1 className="text-[2.6rem] sm:text-5xl md:text-7xl leading-[1.05] mb-6">
                 Speak English with
                 <span className="block italic bg-gradient-to-r from-gold-200 via-gold-400 to-gold-200 bg-clip-text text-transparent bg-[length:200%_auto] animate-shine pb-2">
                   Confidence

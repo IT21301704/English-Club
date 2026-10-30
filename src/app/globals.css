@@ -78,11 +78,11 @@
   }
   /* Small uppercase label above section headings, flanked by gold rules like the logo. */
   .eyebrow {
-    @apply inline-flex items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-gold-600;
+    @apply inline-flex max-w-full items-center gap-2 sm:gap-3 text-[11px] sm:text-xs font-semibold uppercase tracking-[0.18em] sm:tracking-[0.25em] text-gold-600;
   }
   .eyebrow::before, .eyebrow::after {
     content: '';
-    @apply h-px w-8 bg-gold-400;
+    @apply h-px w-4 sm:w-8 shrink-0 bg-gold-400;
   }
   /* Soft paper-toned header band used at the top of inner pages. */
   .page-hero {

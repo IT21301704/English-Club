@@ -8,7 +8,7 @@ import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogoMark, LogoWordmark } from '@/components/ui/logo';
-import { BRAND_NAME, TEACHER_NAME } from '@/lib/brand';
+import { BRAND_NAME } from '@/lib/brand';
 import { Menu, X, BookOpen, LogOut, ChevronDown } from 'lucide-react';
 import { cn, getInitials } from '@/lib/utils';
 
@@ -53,11 +53,14 @@ export function Navbar() {
       <div className="container-custom">
         <div className={cn('flex items-center justify-between transition-all duration-300', scrolled ? 'h-14' : 'h-16')}>
           {/* Logo */}
-          <Link href="/" className="group flex items-center gap-2.5" aria-label={`${BRAND_NAME} home`}>
-            <LogoMark className={cn('ring-0 transition-all duration-300 group-hover:scale-110', scrolled ? 'w-10 h-10' : 'w-12 h-12')} />
-            <span className="flex flex-col gap-1">
-              <span className="font-display italic font-semibold text-sm sm:text-base leading-none text-gold-700">{TEACHER_NAME}&rsquo;s</span>
-              <LogoWordmark className="h-3 sm:h-3.5" />
+          <Link href="/" className="group flex items-center gap-2 sm:gap-2.5 min-w-0" aria-label={`${BRAND_NAME} home`}>
+            <LogoMark className={cn('ring-0 transition-all duration-300 group-hover:scale-110', scrolled ? 'w-10 h-10' : 'w-11 h-11 sm:w-12 sm:h-12')} />
+            {/* On small laptops (lg) the wordmark gives way so the menu links still fit on one row. */}
+            <LogoWordmark className="h-2.5 sm:h-3.5 shrink-0 lg:hidden xl:block" />
+            <span className="h-8 w-px bg-gold-400 shrink-0 lg:hidden xl:block" aria-hidden />
+            {/* Two lines on phones and laptops so it fits beside the menu. */}
+            <span className="font-display italic font-semibold text-[15px] sm:text-lg leading-[1.1] text-gold-700 whitespace-nowrap">
+              <span className="block sm:inline lg:block 2xl:inline">Mrs. Devika</span> Perera
             </span>
           </Link>
 
