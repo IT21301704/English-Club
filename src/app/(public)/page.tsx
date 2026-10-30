@@ -110,17 +110,24 @@ export default function HomePage() {
       <section className="section-padding bg-white overflow-hidden">
         <div className="container-custom grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
           <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-            <div className="absolute -top-5 -left-5 w-2/3 h-2/3 rounded-3xl border-2 border-gold-300" aria-hidden />
+            {/* Her face sits right of centre in the photo, so the frame, inset photo and badge
+                are arranged around the left and edges to keep it clear. */}
+            <div className="absolute -top-5 -right-5 w-2/3 h-2/3 rounded-3xl border-2 border-gold-300" aria-hidden />
             <ImageReveal className="relative aspect-[4/5] rounded-3xl shadow-2xl">
-              <Image src="/images/student-books.jpg" alt="Students learning English in a classroom" fill
-                sizes="(min-width: 1024px) 40vw, 90vw" className="object-cover" />
+              <Image src="/images/devika-perera.jpg" alt={`${TEACHER_NAME} — English Lecturer`} fill
+                sizes="(min-width: 1024px) 40vw, 90vw" className="object-cover object-[66%_center]" />
+              <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-950/85 to-transparent" />
+              <div className="absolute bottom-5 right-5 text-right text-white">
+                <p className="font-display text-2xl md:text-3xl font-semibold leading-tight">{TEACHER_NAME}</p>
+                <p className="text-xs uppercase tracking-[0.2em] text-gold-300 mt-1">English Lecturer</p>
+              </div>
             </ImageReveal>
             <ImageReveal from="bottom" delay={0.35}
-              className="absolute -bottom-8 -right-4 md:-right-8 w-2/5 aspect-square rounded-2xl border-[6px] border-white shadow-xl">
+              className="absolute -bottom-8 -left-4 md:-left-8 w-1/3 aspect-square rounded-2xl border-[6px] border-white shadow-xl">
               <Image src="/images/apple-books.jpg" alt="Books, an apple and alphabet blocks on a teacher's desk" fill
                 sizes="20vw" className="object-cover" />
             </ImageReveal>
-            <Float delay={0.8} className="absolute top-8 -right-2 md:-right-6">
+            <Float delay={0.8} className="absolute top-8 -left-2 md:-left-6">
               <div className="rounded-2xl bg-brand-950 text-white px-5 py-4 shadow-xl">
                 <div className="font-display text-3xl font-semibold text-gold-400 leading-none">10+</div>
                 <div className="text-xs uppercase tracking-wider text-brand-200 mt-1">Years teaching</div>

@@ -47,9 +47,15 @@ export default function AboutPage() {
             <div className="flex flex-col gap-6">
               <div className="relative">
                 <div className="absolute -bottom-4 -right-4 w-2/3 h-2/3 rounded-2xl border-2 border-gold-300" aria-hidden />
-                <ImageReveal className="relative h-80 rounded-2xl shadow-xl">
-                  <Image src="/images/teacher-classroom.jpg" alt="An English teacher leading a lively class" fill
-                    sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover" priority />
+                {/* 4:3 matches the photo, so on desktop it shows uncropped; on phones it keeps her face in view. */}
+                <ImageReveal className="relative aspect-[4/3] rounded-2xl shadow-xl">
+                  <Image src="/images/devika-perera.jpg" alt={`${TEACHER_NAME} — English Lecturer`} fill
+                    sizes="(min-width: 1024px) 45vw, 100vw" className="object-cover object-[62%_30%]" priority />
+                  <div className="absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-brand-950/85 to-transparent" />
+                  <div className="absolute bottom-4 left-5 text-white">
+                    <p className="font-display text-2xl font-semibold leading-tight">{TEACHER_NAME}</p>
+                    <p className="text-xs uppercase tracking-[0.2em] text-gold-300 mt-1">English Lecturer</p>
+                  </div>
                 </ImageReveal>
               </div>
               <Stagger className="grid grid-cols-2 gap-4">

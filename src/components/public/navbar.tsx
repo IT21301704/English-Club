@@ -8,7 +8,7 @@ import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogoMark, LogoWordmark } from '@/components/ui/logo';
-import { BRAND_NAME } from '@/lib/brand';
+import { BRAND_NAME, TEACHER_NAME } from '@/lib/brand';
 import { Menu, X, BookOpen, LogOut, ChevronDown } from 'lucide-react';
 import { cn, getInitials } from '@/lib/utils';
 
@@ -58,9 +58,9 @@ export function Navbar() {
             {/* On small laptops (lg) the wordmark gives way so the menu links still fit on one row. */}
             <LogoWordmark className="h-2.5 sm:h-3.5 shrink-0 lg:hidden xl:block" />
             <span className="h-8 w-px bg-gold-400 shrink-0 lg:hidden xl:block" aria-hidden />
-            {/* Two lines on phones and laptops so it fits beside the menu. */}
-            <span className="font-display italic font-semibold text-[15px] sm:text-lg leading-[1.1] text-gold-700 whitespace-nowrap">
-              <span className="block sm:inline lg:block 2xl:inline">Mrs. Devika</span> Perera
+            {/* Kept on one line; slightly smaller on phones so it fits beside the menu. */}
+            <span className="font-display italic font-semibold text-sm sm:text-lg leading-[1.1] text-gold-700 whitespace-nowrap">
+              {TEACHER_NAME}
             </span>
           </Link>
 

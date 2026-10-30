@@ -75,7 +75,10 @@ export function HoverLift({ className, children, ...props }: HTMLMotionProps<'di
 export function ImageReveal({
   className, children, delay = 0, from = 'left',
 }: { className?: string; children: React.ReactNode; delay?: number; from?: 'left' | 'bottom' }) {
+  const reduce = useReducedMotion();
   const hidden = from === 'left' ? 'inset(0 100% 0 0)' : 'inset(100% 0 0 0)';
+  // MotionConfig's reducedMotion only skips transforms, so the clip-path wipe needs its own opt-out.
+  if (reduce) return <div className={cn('overflow-hidden', className)}><div className="relative h-full w-full">{children}</div></div>;
   return (
     <motion.div
       className={cn('overflow-hidden', className)}
