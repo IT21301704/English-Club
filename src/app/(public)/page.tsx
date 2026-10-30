@@ -9,6 +9,7 @@ import {
 } from 'lucide-react';
 import { Reveal, Stagger, StaggerItem, HoverLift, CountUp, ImageReveal, Parallax, Float } from '@/components/motion';
 import { HeroVideo } from '@/components/public/hero-video';
+import { BRAND_NAME, TEACHER_NAME } from '@/lib/brand';
 
 const stats = [
   { label: 'Students Taught', value: 500, suffix: '+', icon: Users },
@@ -57,7 +58,7 @@ export default function HomePage() {
         <div className="container-custom section-padding relative z-10 w-full pb-32 md:pb-40">
           <Stagger gap={0.14} className="max-w-3xl mx-auto text-center">
             <StaggerItem>
-              <span className="eyebrow mb-6 text-gold-300 before:bg-gold-300 after:bg-gold-300">English Club</span>
+              <span className="eyebrow mb-6 text-gold-300 before:bg-gold-300 after:bg-gold-300">{BRAND_NAME}</span>
             </StaggerItem>
             <StaggerItem>
               <h1 className="text-5xl md:text-7xl leading-[1.05] mb-6">
@@ -128,7 +129,7 @@ export default function HomePage() {
           </div>
 
           <Reveal>
-            <span className="eyebrow mb-4">Meet Your Teacher</span>
+            <span className="eyebrow mb-4">Meet {TEACHER_NAME}</span>
             <h2 className="text-4xl md:text-5xl text-brand-950 leading-tight mb-6">
               English lessons that build <em className="text-gold-600">real confidence</em>
             </h2>

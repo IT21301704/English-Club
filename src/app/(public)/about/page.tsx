@@ -5,6 +5,7 @@ import { GraduationCap, Award, BookOpen, Users, Mail, Download } from 'lucide-re
 import Link from 'next/link';
 import Image from 'next/image';
 import { ImageReveal, Stagger, StaggerItem } from '@/components/motion';
+import { TEACHER_NAME } from '@/lib/brand';
 
 const qualifications = [
   { title: 'Bachelor of Science in Mathematics', institution: 'University of Colombo', year: '2008' },
@@ -28,6 +29,7 @@ export default function AboutPage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="animate-fade-in">
               <Badge variant="brand" className="mb-4">About Me</Badge>
+              <p className="font-display italic text-2xl text-gold-700 mb-2">{TEACHER_NAME}</p>
               <h1 className="text-5xl md:text-6xl text-brand-950 mb-6 leading-tight">
                 Passionate About <span className="text-gradient">Education & Growth</span>
               </h1>

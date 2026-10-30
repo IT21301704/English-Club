@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Eye, EyeOff, Loader2 } from 'lucide-react';
 import { LogoFull } from '@/components/ui/logo';
+import { BRAND_NAME, TEACHER_NAME } from '@/lib/brand';
 
 export default function LoginPage() {
   const router = useRouter();
@@ -48,7 +49,10 @@ export default function LoginPage() {
     <Card className="w-full max-w-md shadow-xl">
       <CardHeader className="text-center pb-2">
         <div className="flex justify-center mb-3">
-          <Link href="/" aria-label="English Club home"><LogoFull className="w-44" /></Link>
+          <Link href="/" aria-label={`${BRAND_NAME} home`} className="text-center">
+            <span className="block font-display italic font-semibold text-xl text-gold-700 mb-1">{TEACHER_NAME}&rsquo;s</span>
+            <LogoFull className="w-44" />
+          </Link>
         </div>
         <CardTitle className="text-2xl">Welcome back</CardTitle>
         <p className="text-sm text-muted-foreground">Sign in to your English Club account</p>

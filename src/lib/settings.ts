@@ -1,8 +1,9 @@
 import { db } from '@/lib/db';
 import type { SettingKey } from '@/lib/validators';
+import { BRAND_NAME } from '@/lib/brand';
 
 export const DEFAULT_SETTINGS: Record<SettingKey, string> = {
-  siteName: 'English Club',
+  siteName: BRAND_NAME,
   tagline: 'Learn with confidence',
   contactEmail: 'info@edupro.lk',
   contactPhone: '+94 70 123 4567',

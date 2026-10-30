@@ -2,6 +2,7 @@ import Link from 'next/link';
 import { LogoFull } from '@/components/ui/logo';
 import { Mail, Phone, MapPin, Facebook, Linkedin, Youtube } from 'lucide-react';
 import { getSettings } from '@/lib/settings';
+import { TEACHER_NAME } from '@/lib/brand';
 
 export async function Footer() {
   const settings = await getSettings();
@@ -18,6 +19,7 @@ export async function Footer() {
           {/* Brand */}
           <div className="space-y-4">
             <Link href="/" className="inline-block rounded-xl bg-white p-3" aria-label={`${settings.siteName} home`}>
+              <span className="block text-center font-display italic font-semibold text-lg leading-none text-gold-700 mb-1">{TEACHER_NAME}&rsquo;s</span>
               <LogoFull className="w-40" />
             </Link>
             <p className="text-sm text-gray-400 leading-relaxed">

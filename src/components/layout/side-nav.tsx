@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { LogOut, Menu, X, type LucideIcon } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { LogoMark } from '@/components/ui/logo';
+import { TEACHER_NAME } from '@/lib/brand';
 import { cn } from '@/lib/utils';
 
 export type NavItem = { label: string; href: string; icon: LucideIcon };
@@ -52,8 +53,10 @@ function NavContent({
         <motion.div whileHover={{ scale: 1.08 }}>
           <LogoMark />
         </motion.div>
-        <span className={cn('font-bold', t.brandName)}>English Club</span>
-        <span className={cn('text-xs ml-1', t.brandTag)}>{tag}</span>
+        <span className="flex flex-col leading-tight min-w-0">
+          <span className="font-display italic text-xs text-gold-500 truncate">{TEACHER_NAME}&rsquo;s</span>
+          <span className={cn('font-bold', t.brandName)}>English Club <span className={cn('text-xs font-normal ml-1', t.brandTag)}>{tag}</span></span>
+        </span>
       </div>
       <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
         {items.map(({ label, href, icon: Icon }) => {

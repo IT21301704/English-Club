@@ -8,6 +8,7 @@ import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { LogoMark, LogoWordmark } from '@/components/ui/logo';
+import { BRAND_NAME, TEACHER_NAME } from '@/lib/brand';
 import { Menu, X, BookOpen, LogOut, ChevronDown } from 'lucide-react';
 import { cn, getInitials } from '@/lib/utils';
 
@@ -52,9 +53,12 @@ export function Navbar() {
       <div className="container-custom">
         <div className={cn('flex items-center justify-between transition-all duration-300', scrolled ? 'h-14' : 'h-16')}>
           {/* Logo */}
-          <Link href="/" className="group flex items-center gap-2.5" aria-label="English Club home">
+          <Link href="/" className="group flex items-center gap-2.5" aria-label={`${BRAND_NAME} home`}>
             <LogoMark className={cn('ring-0 transition-all duration-300 group-hover:scale-110', scrolled ? 'w-10 h-10' : 'w-12 h-12')} />
-            <LogoWordmark className="h-3.5 sm:h-4" />
+            <span className="flex flex-col gap-1">
+              <span className="font-display italic font-semibold text-sm sm:text-base leading-none text-gold-700">{TEACHER_NAME}&rsquo;s</span>
+              <LogoWordmark className="h-3 sm:h-3.5" />
+            </span>
           </Link>
 
           {/* Desktop Nav */}

@@ -2,15 +2,16 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Providers } from '@/components/providers';
 import { Toaster } from '@/components/ui/toaster';
+import { BRAND_NAME } from '@/lib/brand';
 
 export const metadata: Metadata = {
-  title: { default: 'English Club', template: '%s | English Club' },
+  title: { default: BRAND_NAME, template: `%s | ${BRAND_NAME}` },
   description: 'Professional Learning Management System — Online Courses, Training & Mentorship',
   keywords: ['LMS', 'online courses', 'training', 'e-learning', 'education'],
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    siteName: 'English Club',
+    siteName: BRAND_NAME,
   },
 };
 
