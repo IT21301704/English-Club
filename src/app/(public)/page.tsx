@@ -10,13 +10,7 @@ import {
 import { Reveal, Stagger, StaggerItem, HoverLift, CountUp, ImageReveal, Parallax, Float } from '@/components/motion';
 import { HeroVideo } from '@/components/public/hero-video';
 import { BRAND_NAME, TEACHER_NAME } from '@/lib/brand';
-
-const stats = [
-  { label: 'Students Taught', value: 500, suffix: '+', icon: Users },
-  { label: 'English Courses', value: 20, suffix: '+', icon: BookOpen },
-  { label: 'Years Teaching', value: 10, suffix: '+', icon: Award },
-  { label: 'Exam Pass Rate', value: 95, suffix: '%', icon: TrendingUp },
-];
+import { getSettings, splitStat } from '@/lib/settings';
 
 const programmes = [
   { title: 'Spoken English', desc: 'Fluency and confidence for conversations, interviews and presentations.', image: '/images/group-learning.jpg', icon: MessageCircle },
@@ -45,7 +39,14 @@ const featuredCourses = [
   { title: 'A/L English Literature', category: 'Literature', image: '/images/apple-books.jpg', price: 'LKR 15,000', duration: '6 months', students: 85, rating: 4.9, level: 'Advanced' },
 ];
 
-export default function HomePage() {
+export default async function HomePage() {
+  const settings = await getSettings();
+  const stats = [
+    { label: 'Students Taught', ...splitStat(settings.studentsTaught), icon: Users },
+    { label: 'English Courses', ...splitStat(settings.coursesCreated), icon: BookOpen },
+    { label: 'Years Teaching', ...splitStat(settings.yearsTeaching), icon: Award },
+    { label: 'Exam Pass Rate', ...splitStat(settings.passRate), icon: TrendingUp },
+  ];
   return (
     <div className="flex flex-col">
       {/* Hero */}
@@ -94,10 +95,10 @@ export default function HomePage() {
         <div className="container-custom">
           <Reveal>
             <Stagger className="grid grid-cols-2 lg:grid-cols-4 rounded-2xl bg-white shadow-2xl shadow-brand-950/10 ring-1 ring-brand-950/5 divide-x divide-y lg:divide-y-0 divide-gold-100">
-              {stats.map(({ label, value, suffix, icon: Icon }) => (
+              {stats.map(({ label, value, prefix, suffix, icon: Icon }) => (
                 <StaggerItem key={label} className="group text-center px-4 py-7 md:py-8">
                   <Icon className="h-6 w-6 mx-auto mb-2 text-gold-500 transition-transform duration-300 group-hover:scale-125 group-hover:-rotate-6" />
-                  <div className="font-display text-4xl md:text-5xl font-semibold text-brand-950"><CountUp value={value} suffix={suffix} /></div>
+                  <div className="font-display text-4xl md:text-5xl font-semibold text-brand-950"><CountUp value={value} prefix={prefix} suffix={suffix} /></div>
                   <div className="text-xs md:text-sm uppercase tracking-wider text-gray-500 mt-1">{label}</div>
                 </StaggerItem>
               ))}
@@ -129,7 +130,7 @@ export default function HomePage() {
             </ImageReveal>
             <Float delay={0.8} className="absolute top-8 -left-2 md:-left-6">
               <div className="rounded-2xl bg-brand-950 text-white px-5 py-4 shadow-xl">
-                <div className="font-display text-3xl font-semibold text-gold-400 leading-none">10+</div>
+                <div className="font-display text-3xl font-semibold text-gold-400 leading-none">{settings.yearsTeaching}</div>
                 <div className="text-xs uppercase tracking-wider text-brand-200 mt-1">Years teaching</div>
               </div>
             </Float>

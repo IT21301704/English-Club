@@ -26,6 +26,19 @@ const GROUPS: { title: string; fields: { key: SettingKey; label: string; multili
     { key: 'youtubeUrl', label: 'YouTube URL' },
     { key: 'linkedinUrl', label: 'LinkedIn URL' },
   ] },
+  { title: 'Teacher profile — numbers (home & About pages)', fields: [
+    { key: 'yearsTeaching', label: 'Years teaching', placeholder: 'e.g. 20+' },
+    { key: 'studentsTaught', label: 'Students taught', placeholder: 'e.g. 500+' },
+    { key: 'coursesCreated', label: 'Courses created', placeholder: 'e.g. 20+' },
+    { key: 'passRate', label: 'Exam pass rate', placeholder: 'e.g. 95%' },
+  ] },
+  { title: 'Teacher profile — text (About & Profile pages)', fields: [
+    { key: 'aboutIntro', label: 'About me introduction', multiline: true },
+    { key: 'experienceList', label: 'Professional experience — one per line: Role | Organisation | Period | Description', multiline: true },
+    { key: 'qualificationsList', label: 'Qualifications — one per line: Title | Institution | Year', multiline: true },
+    { key: 'certificationsList', label: 'Certifications — one per line', multiline: true },
+    { key: 'subjectsList', label: 'Subjects taught — one per line', multiline: true },
+  ] },
   { title: 'Payments', fields: [
     { key: 'paymentInstructions', label: 'Payment instructions (shown on unpaid invoices — bank details etc.)', multiline: true },
   ] },

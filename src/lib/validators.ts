@@ -135,9 +135,12 @@ export const SETTING_KEYS = [
   'siteName', 'tagline', 'contactEmail', 'contactPhone', 'address', 'officeHours',
   'facebookUrl', 'youtubeUrl', 'linkedinUrl', 'whatsappNumber',
   'paymentInstructions',
+  // Teacher profile (home, About and Profile pages)
+  'yearsTeaching', 'studentsTaught', 'coursesCreated', 'passRate',
+  'aboutIntro', 'experienceList', 'qualificationsList', 'certificationsList', 'subjectsList',
 ] as const;
 export type SettingKey = (typeof SETTING_KEYS)[number];
 
 export const settingsSchema = z.object(
-  Object.fromEntries(SETTING_KEYS.map(k => [k, z.string().trim().max(2000).optional()])) as Record<SettingKey, z.ZodOptional<z.ZodString>>
+  Object.fromEntries(SETTING_KEYS.map(k => [k, z.string().trim().max(5000).optional()])) as Record<SettingKey, z.ZodOptional<z.ZodString>>
 );

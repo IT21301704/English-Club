@@ -6,21 +6,17 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ImageReveal, Stagger, StaggerItem } from '@/components/motion';
 import { TEACHER_NAME } from '@/lib/brand';
+import { getSettings, rows } from '@/lib/settings';
 
-const qualifications = [
-  { title: 'Bachelor of Science in Mathematics', institution: 'University of Colombo', year: '2008' },
-  { title: 'Master of Education', institution: 'University of Peradeniya', year: '2012' },
-  { title: 'PhD in Educational Psychology', institution: 'University of Kelaniya', year: '2018' },
-];
-
-const achievements = [
-  { label: 'Students Mentored', value: '500+' },
-  { label: 'Years Teaching', value: '10+' },
-  { label: 'Courses Created', value: '20+' },
-  { label: 'Success Rate', value: '95%' },
-];
-
-export default function AboutPage() {
+export default async function AboutPage() {
+  const settings = await getSettings();
+  const qualifications = rows(settings.qualificationsList).map(([title, institution = '', year = '']) => ({ title, institution, year }));
+  const achievements = [
+    { label: 'Students Mentored', value: settings.studentsTaught },
+    { label: 'Years Teaching', value: settings.yearsTeaching },
+    { label: 'Courses Created', value: settings.coursesCreated },
+    { label: 'Success Rate', value: settings.passRate },
+  ];
   return (
     <div>
       {/* Hero */}
@@ -33,9 +29,7 @@ export default function AboutPage() {
               <h1 className="text-5xl md:text-6xl text-brand-950 mb-6 leading-tight">
                 Passionate About <span className="text-gradient">Education & Growth</span>
               </h1>
-              <p className="text-gray-600 text-lg leading-relaxed mb-6">
-                With over 10 years of experience in professional education and training, I have dedicated my career to helping students unlock their true potential. My teaching approach combines academic rigor with practical application.
-              </p>
+              <p className="text-gray-600 text-lg leading-relaxed mb-6 whitespace-pre-line">{settings.aboutIntro}</p>
               <p className="text-gray-600 leading-relaxed mb-8">
                 I believe every student has unique strengths, and my role is to create personalized learning experiences that bring out the best in each individual. From foundational concepts to advanced topics, I guide students with patience, clarity, and dedication.
               </p>
@@ -87,9 +81,9 @@ export default function AboutPage() {
                   </div>
                   <div className="flex-1">
                     <h3 className="font-semibold text-gray-900">{q.title}</h3>
-                    <p className="text-sm text-gray-500">{q.institution}</p>
+                    {q.institution && <p className="text-sm text-gray-500">{q.institution}</p>}
                   </div>
-                  <Badge variant="secondary">{q.year}</Badge>
+                  {q.year && <Badge variant="secondary">{q.year}</Badge>}
                 </CardContent>
               </Card>
             ))}
